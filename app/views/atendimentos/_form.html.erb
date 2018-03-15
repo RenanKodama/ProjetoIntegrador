@@ -1,0 +1,54 @@
+<%= form_for @atendimento, :html => { :class => "form-horizontal atendimento" } do |f| %>
+
+  <% if @atendimento.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@atendimento.errors.count, "error") %> prohibited this atendimento from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @atendimento.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :aluno_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :aluno_id, options_for_select(Aluno.all.map{|a|[a.pessoa.pessoa_nome, a.id]}), {:prompt => 'Selecione o aluno'}%>
+    </div>
+    <%=f.error_span(:aluno_id) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :telefone, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :telefone, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :area, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select(:area, [['Psicólogo(a)', 'Psicólogo(a)'], ['Pedagogo(a)', 'Pedagogo(a)'], ['Assistente Social', 'Assistente Social']], {:prompt => 'Selecione a área'}) %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :funcionario_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :funcionario_id, options_for_select(Funcionario.all.map{|f|[f.pessoa.pessoa_nome, f.id]}), {:prompt => 'Selecione o Funcionário'}%>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                atendimentos_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

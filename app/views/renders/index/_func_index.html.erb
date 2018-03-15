@@ -1,0 +1,12 @@
+<%if current_user.role == 'psicologx'%> 
+    <%= render 'renders/index/funcionarios/assistente_social_index' %>
+<%end%>
+
+<%if current_user.role == 'pedagogx'%>
+	<%= render 'renders/index/funcionarios/pedagogx_index' %>
+
+<%end%>
+
+<%if current_user.role == 'assistente_social'%>
+	<%= render 'renders/index/funcionarios/psicologx_index' %>	 
+<%end%>

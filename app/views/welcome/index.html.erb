@@ -1,0 +1,5 @@
+<% if current_user.pedagogx? || current_user.psicologx? || current_user.assistente_social?%>
+    <%= render 'renders/index/func_index' %>
+<%else%>
+	<%= render 'renders/index/admin_index' %>
+<%end%>
